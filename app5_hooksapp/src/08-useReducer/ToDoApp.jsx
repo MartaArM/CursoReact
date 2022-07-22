@@ -4,12 +4,12 @@ import { ToDoList } from "./ToDoList";
 
 export const ToDoApp = () => {
 
-    const {toDos, handleNewToDo, removeToDo, doneToDo} = useToDo();
+    const {toDos, handleNewToDo, removeToDo, doneToDo, toDosLength, pendingToDos} = useToDo();
     
     return (
         <>
             <h1> ToDoApp </h1>
-            <h2> Totales: {toDos.length} Pendientes: {toDos.filter( (todo) => todo.done == false).length}</h2>
+            <h2> Totales: {toDosLength} Pendientes: {pendingToDos}</h2>
             <hr/>
 
             <div className="row">

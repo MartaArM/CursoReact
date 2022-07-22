@@ -43,10 +43,17 @@ export const useToDo = (initialState = []) => {
         dispatch(action);
     }
 
+    const toDosLength =  toDos.length;
+    
+
+    const pendingToDos =  toDos.filter( (todo) => todo.done == false).length;
+
     return {
         toDos: toDos,
         handleNewToDo: handleNewToDo,
         removeToDo: removeToDo,
-        doneToDo: doneToDo
+        doneToDo: doneToDo,
+        toDosLength: toDosLength,
+        pendingToDos: pendingToDos
     }
 }
