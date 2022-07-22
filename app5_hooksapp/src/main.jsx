@@ -5,9 +5,11 @@ import { HooksApp } from './HooksApp'
 
 import './index.css'
 import { ToDoApp } from './08-useReducer/ToDoApp'
+import { MainApp } from './09-useContext/MainApp'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ToDoApp/>
+    {/* <ToDoApp/> */}
+    <MainApp/>
   </React.StrictMode>
 )
