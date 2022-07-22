@@ -1,8 +1,6 @@
-import { useEffect, useReducer } from "react"
 import { useToDo } from "../hooks/useToDo";
 import { ToDoAdd } from "./ToDoAdd";
 import { ToDoList } from "./ToDoList";
-import { toDoReducer } from "./toDoReducer";
 
 export const ToDoApp = () => {
 
@@ -11,6 +9,7 @@ export const ToDoApp = () => {
     return (
         <>
             <h1> ToDoApp </h1>
+            <h2> Totales: {toDos.length} Pendientes: {toDos.filter( (todo) => todo.done == false).length}</h2>
             <hr/>
 
             <div className="row">
