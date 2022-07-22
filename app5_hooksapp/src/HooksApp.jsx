@@ -7,7 +7,6 @@ import { FocusScreen } from "./04-useRef/FocusScreen"
 import { Memorize } from "./05-useMemo/Memorize"
 import { CallbackHook } from "./06-useCallback/CallbackHook"
 import { Padre } from "./07-tarea-memo/Padre"
-import './08-useReducer/intro-reducer'
 
 export const HooksApp = () => {
     return (

@@ -16,10 +16,8 @@ export const toDoReducer = (initialState, action) => {
                         done: !(todo.done)
                     }
                 }
-
                 return todo;
             })            
-            //return initialState.filter( (todo) => todo.id != action.payload);
         default:
             return initialState;
     }
