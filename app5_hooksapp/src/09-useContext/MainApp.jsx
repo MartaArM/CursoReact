@@ -8,7 +8,6 @@ import { NotFoundPage } from "./NotFoundPage"
 export const MainApp = () => {
     return (
         <>
-            <h1>MainApp</h1>
             <NavBar/> {/* Barra de navegación */}
 
             <hr style={{borderTop: '2px solid #15c29f'}}/>

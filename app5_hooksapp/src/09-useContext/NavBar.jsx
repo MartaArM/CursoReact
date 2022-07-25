@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 export const NavBar = () => {
   return (
@@ -7,9 +7,9 @@ export const NavBar = () => {
     //     <Link to="login">Login</Link>
     //     <Link to="about">About</Link>
     // </>
-    <nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded-3">
         <div className="container-fluid">
-            {/* <Link className="navbar-brand" to="/">Home</Link> */}
+            <Link className="navbar-brand" to="/">useContext</Link>
             {/* <a className="navbar-brand" href="#">Navbar</a> */}
             {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> */}
             {/* <span className="navbar-toggler-icon"></span> */}
@@ -17,16 +17,18 @@ export const NavBar = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/">Home</Link>
-                {/* <a className="nav-link active" aria-current="page" href="#">Home</a> */}
+                    <NavLink className={({isActive}) => {
+                        let clase = (isActive == true) ? " active" : "";
+                        return "nav-link" + clase;
+                    }} 
+                    to="login"> Login </NavLink>
                 </li>
                 <li className="nav-item">
-                    <Link  className="nav-link" to="login">Login</Link>
-                {/* <a className="nav-link" href="#">Features</a> */}
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="about">About</Link>
-                {/* <a className="nav-link" href="#">Pricing</a> */}
+                    <NavLink className={({isActive}) => {
+                        let clase = (isActive == true) ? " active" : "";
+                        return "nav-link" + clase;
+                    }} 
+                    to="about"> About </NavLink>
                 </li>
             </ul>
             </div>
