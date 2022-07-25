@@ -3,6 +3,7 @@ import { UserContext } from "./context/UserContext";
 
 export const LoginPage = () => {
 
+    // useContext para poder usar el usuario y la funcion para crearlo
     const {user, setUser} = useContext(UserContext);
 
     return (
@@ -11,6 +12,7 @@ export const LoginPage = () => {
             <hr/>
 
             <button className="btn btn-primary"
+            // Cuando le damos al botón, creamos el usuario
             onClick={() => setUser({id: 123, name: "Marta", email: "marta@gmail.com"})}>
                 Crear usuario
             </button>

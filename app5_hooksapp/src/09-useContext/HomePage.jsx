@@ -10,6 +10,7 @@ export const HomePage = () => {
             <h2>Home Page</h2>
             <hr/>
 
+            {/* Imprimimos el usuario */}
             <p>{JSON.stringify(user)}</p>
         </>
     )
