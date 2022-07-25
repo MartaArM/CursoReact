@@ -10,15 +10,11 @@ export const NavBar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded-3">
         <div className="container-fluid">
             <Link className="navbar-brand" to="/">useContext</Link>
-            {/* <a className="navbar-brand" href="#">Navbar</a> */}
-            {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> */}
-            {/* <span className="navbar-toggler-icon"></span> */}
-            {/* </button> */}
             <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
                 <li className="nav-item">
                     <NavLink className={({isActive}) => {
-                        let clase = (isActive == true) ? " active" : "";
+                        let clase = (isActive == true) ? " active" : ""; // Si es la página en la que nos encontramos, que la muestre activa.
                         return "nav-link" + clase;
                     }} 
                     to="login"> Login </NavLink>
