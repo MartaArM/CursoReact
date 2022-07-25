@@ -11,7 +11,7 @@ export const HomePage = () => {
             <hr/>
 
             {/* Imprimimos el usuario */}
-            <p>{JSON.stringify(user)}</p>
+            <p>{JSON.stringify(user, null, 3)}</p>
         </>
     )
 }
