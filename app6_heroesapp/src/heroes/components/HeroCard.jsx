@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
+// Carta que muestra la foto y los datos del héroe
 export const HeroCard = ({hero}) => {
     
     const image = "/assets/heroes/" + hero.id + ".jpg";
-    // const image = "C:/Users/marenasm/Documents/React/app6_heroesapp/src/assets/heroes/" + hero.id + ".jpg";
     return (
         <div className="col">
             <div className="card">
@@ -25,7 +25,7 @@ export const HeroCard = ({hero}) => {
                                 <small>{hero.first_appearance}</small>
                             </p>
 
-                            <Link to={"/hero/" + hero.id}> {/* Boton para ver más información */}
+                            <Link to={"/hero/" + hero.id}> {/* Link para ver más información */}
                                 Más...
                             </Link>
                         </div>

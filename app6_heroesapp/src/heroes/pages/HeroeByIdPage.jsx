@@ -18,6 +18,7 @@ export const HeroeByIdPage = () => {
 
     const image = "/assets/heroes/" + hero.id + ".jpg";
 
+    // Mostramos el héroe 
     return (
       <div className="container-fluid container-size m-4">
         <div className="row">
@@ -45,6 +46,7 @@ export const HeroeByIdPage = () => {
             <div className="align-self-end row">
               <p  className="col-7"><b>{hero.publisher}</b></p> 
               
+              {/* Botón de volver atrás */}
               <button 
               className="col-5 btn btn-color"
               onClick={onNavigateBack}> Volver </button>

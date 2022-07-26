@@ -1,6 +1,7 @@
 import { getHeroesByPublisher } from "../helpers/getHeroesByPublisher"
 import { HeroCard } from "./HeroCard";
 
+// Muestra todos los héroes de un "publisher" específico como tarjetas
 export const ShowHeroes = ({publisher}) => {
 
     const heroes = getHeroesByPublisher(publisher);
@@ -13,6 +14,7 @@ export const ShowHeroes = ({publisher}) => {
     //         ) )
     //     }
     // </ul>
+    
     <div className="row rows-cols-1 row-cols-md-3 g-3">
         {
             heroes.map( (element) =>  ( // Por cada categoría creamos una lista de gifs

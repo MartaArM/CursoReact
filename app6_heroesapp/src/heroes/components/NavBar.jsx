@@ -1,8 +1,10 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
+// Bara de navegación
+
 export const Navbar = () => {
 
-    const navigate = useNavigate(); // Nuevo hook
+    const navigate = useNavigate(); 
 
     const onLogout = () => { // Cuando pulso el botón de logout, me lleva al login
         navigate('/login', {
@@ -23,9 +25,10 @@ export const Navbar = () => {
             <div className="navbar-collapse">
                 <div className="navbar-nav">
 
+                    {/*Página de Marvel */}
                     <NavLink 
-                        className={({isActive}) => {
-                            let clase = (isActive == true) ? " active" : ""; // Si es la página en la que nos encontramos, que la muestre activa.
+                        className={({isActive}) => { // Si es la página en la que nos encontramos, que la muestre activa.
+                            let clase = (isActive == true) ? " active" : ""; 
                             return "nav-item nav-link" + clase;
                         }}
                         to="/marvel"
@@ -33,7 +36,8 @@ export const Navbar = () => {
                         Marvel
                     </NavLink>
 
-                    <NavLink 
+                    {/* Página de DC  */}
+                    <NavLink
                         className={({isActive}) => {
                             let clase = (isActive == true) ? " active" : ""; 
                             return "nav-item nav-link" + clase;
@@ -43,6 +47,7 @@ export const Navbar = () => {
                         DC
                     </NavLink>
 
+                    {/*Página de búsqueda */}                
                     <NavLink 
                         className={({isActive}) => {
                             let clase = (isActive == true) ? " active" : ""; 

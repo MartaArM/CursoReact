@@ -5,6 +5,7 @@ import { HeroeByIdPage } from "../pages/HeroeByIdPage"
 import { MarvelPage } from "../pages/MarvelPage"
 import { SearchPage } from "../pages/SearchPage"
 
+// Muestra las rutas correspondientes a los héreos
 export const HeroesRoutes = () => {
   return (
     <>
@@ -16,6 +17,7 @@ export const HeroesRoutes = () => {
                 <Route path="dc" element={<DCPage />} />
 
                 <Route path="search" element={<SearchPage />} />
+                {/* Muestra un héroe por id */}
                 <Route path="hero/:id" element={<HeroeByIdPage />} />
 
                 <Route path="/" element={<Navigate to="marvel" />} />

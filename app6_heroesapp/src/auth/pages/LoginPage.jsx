@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
+// Página de login
 export const LoginPage = () => {
 
-  const navigate = useNavigate(); // Nuevo hook
+  const navigate = useNavigate(); // Nuevo hook. Se utiliza para navegar entre páginas
 
-  const onLogin = () => { // Cuando pulso el botón de logout, me lleva al login
-      navigate('/marvel'); //Navegar a la pantalla de login
+  const onLogin = () => { // Cuando pulso el botón de login, me lleva a la página de marvel
+      navigate('/marvel'); 
   }
 
   return (

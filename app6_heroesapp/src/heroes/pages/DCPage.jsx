@@ -1,5 +1,6 @@
 import { ShowHeroes } from "../components/ShowHeroes"
 
+// Muestra héroes de DC
 export const DCPage = () => {
   return (
     <>
