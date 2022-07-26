@@ -13,17 +13,17 @@ export const HeroeByIdPage = () => {
 
   if (!hero) { // Si no hay heroe con ese id volvemos a la principal
     return <Navigate to="/marvel" />;
-  }
+  } 
   else {
 
     const image = "/assets/heroes/" + hero.id + ".jpg";
 
     // Mostramos el héroe 
     return (
-      <div className="container-fluid container-size m-4">
+      <div className="container-fluid container-size m-4 ">
         <div className="row">
-          <div className="col-5 p-3 img-size" >
-            <img src={image} alt={hero.superhero} className="img-fluid" />
+          <div className="col-5 p-3 img-size " >
+            <img src={image} alt={hero.superhero} className="img-fluid animate__animated animate__fadeInLeft" />
           </div>
           <div className=" row col-7 p-3">
             <div className="align-self-start p-3">
