@@ -5,3 +5,7 @@
 .btn-color {
     background-color: #00ffed;
 }
+
+.container-size , .image-size {
+    width: 60%;
+}
