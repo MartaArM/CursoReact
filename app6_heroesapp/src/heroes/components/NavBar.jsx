@@ -5,7 +5,9 @@ export const Navbar = () => {
     const navigate = useNavigate(); // Nuevo hook
 
     const onLogout = () => { // Cuando pulso el botón de logout, me lleva al login
-        navigate('/login'); //Navegar a la pantalla de login
+        navigate('/login', {
+            replace: true
+        }); //Navegar a la pantalla de login
     }
 
     return (
@@ -53,6 +55,7 @@ export const Navbar = () => {
                 </div>
             </div>
 
+            {/* Logout */}
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end ">
                 <ul className="navbar-nav ml-auto">
                     <span className='nav-item nav-link text-primary'>
