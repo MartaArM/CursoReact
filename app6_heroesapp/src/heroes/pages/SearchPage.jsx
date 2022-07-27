@@ -79,8 +79,6 @@ export const SearchPage = () => {
               
             }
 
-            
-
             {
               heroes.map( (element) =>  ( // Por cada categoría creamos una lista de gifs
                   
