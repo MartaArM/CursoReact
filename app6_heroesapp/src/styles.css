@@ -9,3 +9,7 @@
 .container-size , .image-size {
     width: 60%;
 }
+
+.input-margin {
+    margin-right: 10px;
+}
