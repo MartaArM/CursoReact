@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 // Página de login
 export const LoginPage = () => {
 
+  const {login} = useContext(AuthContext);
+
   const navigate = useNavigate(); // Nuevo hook. Se utiliza para navegar entre páginas
 
   const onLogin = () => { // Cuando pulso el botón de login, me lleva a la página de marvel
-      navigate('/marvel'); 
+    login( 'Marta Arenas');
+    navigate('/marvel'); 
   }
 
   return (
