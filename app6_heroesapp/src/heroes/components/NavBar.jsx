@@ -6,13 +6,14 @@ import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Navbar = () => {
 
-    const {state} = useContext(AuthContext); // Vamos a coger el nombre del usuario al hacer login
+    const {state, logout} = useContext(AuthContext); // Vamos a coger el nombre del usuario al hacer login
     
     const name = (state.logged) ? state.user.name : '';
 
     const navigate = useNavigate(); 
 
     const onLogout = () => { // Cuando pulso el botón de logout, me lleva al login
+        logout();
         navigate('/login', {
             replace: true
         }); //Navegar a la pantalla de login
