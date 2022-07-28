@@ -6,5 +6,7 @@ export const PublicRoutes = ({children}) => {
     const {state} = useContext(AuthContext);
     const logged = state.logged;
 
-    return (!logged) ? children :  <Navigate to="/dc"/> 
+    const lastpath = localStorage.getItem('lastpath');
+
+    return (!logged) ? children :  <Navigate to={lastpath}/> 
 }

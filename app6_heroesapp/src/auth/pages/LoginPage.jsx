@@ -9,9 +9,13 @@ export const LoginPage = () => {
 
   const navigate = useNavigate(); // Nuevo hook. Se utiliza para navegar entre páginas
 
+  let lastpath = localStorage.getItem('lastpath');
+
+  lastpath = (lastpath) ? lastpath : '/marvel';
+
   const onLogin = () => { // Cuando pulso el botón de login, me lleva a la página de marvel
     login( 'Marta Arenas');
-    navigate('/marvel'); 
+    navigate(lastpath); 
   }
 
   return (
