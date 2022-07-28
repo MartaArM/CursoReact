@@ -6,7 +6,7 @@ import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Navbar = () => {
 
-    const {state} = useContext(AuthContext);
+    const {state} = useContext(AuthContext); // Vamos a coger el nombre del usuario al hacer login
     
     const name = (state.logged) ? state.user.name : '';
 
