@@ -11,12 +11,13 @@ export const SideBar = () => {
         <Drawer
         variant='permanent'
         open
+        
         sx = {{
             display: {xs: 'block'},
-            '& .MuiDrawer-paper': {boxSizing: 'border-box', width: 240}
+            '& .MuiDrawer-paper': {boxSizing: 'border-box', width: 240, backgroundColor: 'light.main'}
         }}
         >
-            <Toolbar>
+            <Toolbar sx={{backgroundColor: 'primary.main'}}>
                 {/* Titulo del menú lateral */}
                 <Typography variant='h6' noWrap component='div'>
                     Marta
