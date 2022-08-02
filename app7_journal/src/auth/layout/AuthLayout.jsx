@@ -23,7 +23,7 @@ export const AuthLayout = ({children, title}) => {
       >
         <Typography variant='h5' sx={{mb: 1}}> {title} </Typography>
 
-        {children}
+         {children}  {/* Aqui ponemos lo que no es igual en el layout*/}
     </Grid>
     </Grid>
   )
