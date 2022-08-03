@@ -23,6 +23,7 @@ export const PokemonApp = () => {
                   ))
             }
         </ul>
+        <button onClick={() => dispatch(getPokemons(page))}>Siguiente</button>
     </>
   )
 }
