@@ -1,18 +1,22 @@
-import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { useSelector, useDispatch } from 'react-redux'
+import {increment} from './store/slices/counter/counterSlice'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  // useSelector se utiliza para usar el state de ReactRedux
+  const {counter} = useSelector((state) => state.counter); // Del state me interesa sacar el counter
+  const dispatch = useDispatch(); // Para lanzar las acciones del store
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p>¡Hola!</p>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
+          <button type="button" onClick={() =>  dispatch(increment())}> {/* Llamamos a la funcion de incrementar del store */}
+            El counter es: {counter}
           </button>
         </p>
         
