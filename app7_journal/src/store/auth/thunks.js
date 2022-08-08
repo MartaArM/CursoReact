@@ -1,3 +1,4 @@
+import { loginGoogle } from "../../firebase/providers"
 import { checkingAuth } from "./authSlice"
 
 export const checkingUser = (email, password) => {
@@ -8,6 +9,8 @@ export const checkingUser = (email, password) => {
 
 export const startGoogleLogin = () => {
     return async(dispatch) => {
-        dispatch(checkingAuth())
+        dispatch(checkingAuth());
+
+        const result = loginGoogle();
     }
 }
