@@ -6,8 +6,8 @@ import { JournalRoutes } from "../journal/routes/JournalRoutes"
 import { CheckingAuth } from "../ui/components/CheckingAuth"
 
 export const AppRouter = () => {
-    
-    const {status} = useStatus();
+
+    const status = useStatus();
 
     if (status == 'checking') {
       return <CheckingAuth /> // Si estamos comprobando el login, se carga una pantalla de espera con un circulo cargando

@@ -20,7 +20,6 @@ export const useStatus = () => {
     }); // Se lanza cuando el status del usuario cambia
   }, [])
 
-  return {
-    status
-  }
+  return status;
+  
 }
