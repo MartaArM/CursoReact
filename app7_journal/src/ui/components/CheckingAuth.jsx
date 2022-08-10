@@ -11,11 +11,11 @@ export const CheckingAuth = () => {
           sx = {{minHeight: '100vh', backgroundColor: 'primary.main'}}
         >
     
-            <Grid item
+            <Grid container
                 direction='row'
                 justifyContent='center'
             >
-                <CircularProgress color='warning'/>  {/*  Circulo de carga */}
+                <CircularProgress sx = {{color: 'white'}} />  {/*  Circulo de carga */}
             </Grid>
         </Grid>
       )
