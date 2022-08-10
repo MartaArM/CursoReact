@@ -1,7 +1,7 @@
 import { Google } from "@mui/icons-material"
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
+import { useMemo, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link as RouterLink } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { registerUser } from "../../store/auth/thunks"
@@ -14,13 +14,15 @@ const formValidations = {
   displayName: [(value) => (value.length>=1), "El nombre es obligatorio"]
 }
 
+const initialState = {
+  email: '',
+  password: '',
+  displayName: ''
+}
+
 export const RegisterPage = () => {
 
-  const {formState, onInputChange, formValidation, isFormValid} = useForm( {
-    email: '',
-    password: '',
-    displayName: ''
-  }, formValidations)
+  const {formState, onInputChange, formValidation, isFormValid} = useForm( initialState, formValidations)
 
   const {displayName, email, password} = formState;
   const {displayNameValid, emailValid, passwordValid } = formValidation;
@@ -28,14 +30,21 @@ export const RegisterPage = () => {
   const [formSubmitted, setformSubmitted] = useState(false); // Para la primera vez, que no compruebe los campos porque están vacíos
 
   const dispatch = useDispatch();
+
+  // Cogemos el estado y el mensaje de error del store
+  const {status, errorMessage} = useSelector(state => state.auth);
+  // Vamos a comprobar si el estado es 'checking' para bloquear el botón de crear cuenta
+  const isChecking = useMemo(() => ((status=='checking') ? true: false), [status]); // Solo cambia si cambia el estado 
+
+  // Evento que se lanza cuando se manda la información al formulario
   const onSubmit = (event) => {
     event.preventDefault();
     setformSubmitted(true);
 
+    // Si el formulario es válido, lanzamos el registro del usuario 
     if (isFormValid) {
       dispatch(registerUser(email, password, displayName));
     }
-    // dispatch(checkingUser({email, password}));
 
   }
 
@@ -67,8 +76,18 @@ export const RegisterPage = () => {
 
             <Grid container spacing={2} sx={{mb: 2, mt:2}}>
 
+              <Grid item xs={12} 
+              display={ (errorMessage != null) ? '' : 'none'}>
+                <Alert severity='error'>
+                  {errorMessage}
+                </Alert>
+              </Grid>
+
+              {/* Botón de crear cuenta */}
               <Grid item xs={12}>
-                <Button variant="contained" type="submit" fullWidth> 
+                <Button variant="contained" type="submit" 
+                disabled={isChecking}  // Bloqueamos el botón si estamos haciendo comprobaciones
+                fullWidth> 
                 <Typography>
                   Crear cuenta
                 </Typography>
@@ -77,6 +96,7 @@ export const RegisterPage = () => {
 
             </Grid>
 
+            {/* Si tenemos cuenta, vamos al login */}
             <Grid container direction='row' justifyContent='end'>
               <Typography>
                 ¿Ya tienes cuenta? 
