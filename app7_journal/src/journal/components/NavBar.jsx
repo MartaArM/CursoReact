@@ -24,7 +24,7 @@ export const NavBar = () => {
                     Journal App
                 </Typography>
 
-                <IconButton color='error'>
+                <IconButton sx = {{color: 'white'}}>
                     <LogoutOutlined />
                 </IconButton>
             </Grid>
