@@ -1,8 +1,12 @@
 import { TurnedInNot } from '@mui/icons-material'
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 export const SideBar = () => {
+
+    const {displayName} = useSelector(state => state.auth);
+
   return (
     <Box 
     component='nav'
@@ -20,7 +24,7 @@ export const SideBar = () => {
             <Toolbar sx={{backgroundColor: 'primary.main'}}>
                 {/* Titulo del menú lateral */}
                 <Typography variant='h6' noWrap component='div'>
-                    Marta
+                    {displayName}
                 </Typography>
             </Toolbar>
             {/* División entre el título y los elementos del diario */}

@@ -1,7 +1,19 @@
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material"
 import {LogoutOutlined, MenuOutlined} from '@mui/icons-material'
+import { useDispatch } from "react-redux"
+import { logoutUs } from "../../store/auth/thunks";
 
 export const NavBar = () => {
+
+    const dispatch = useDispatch();
+
+    
+
+    const onClick = (event) => {
+        event.preventDefault();
+        dispatch(logoutUs());
+    }
+
   return (
     // Position fixed es para que no se mueva.
     // sm: 'calc(100% - 240px)'} : el tamaño es el total menos 240px
@@ -24,7 +36,7 @@ export const NavBar = () => {
                     Journal App
                 </Typography>
 
-                <IconButton sx = {{color: 'white'}}>
+                <IconButton onClick={onClick} sx = {{color: 'white'}}>
                     <LogoutOutlined />
                 </IconButton>
             </Grid>

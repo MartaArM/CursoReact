@@ -10,8 +10,9 @@ export const useStatus = () => {
 
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, async(user) => {
-      const {uid, email, displayName, photoURL} = user;
+      
       if (user) {
+        const {uid, email, displayName, photoURL} = user;
         return dispatch(login({uid, email, displayName, photoURL}));
       }
       else {
