@@ -7,6 +7,11 @@ import { useForm } from "../../hooks/useForm"
 import { checkingUser, startGoogleLogin } from "../../store/auth/thunks"
 import { AuthLayout } from "../layout/AuthLayout"
 
+const formValidations = {
+  email: [(value) => (value.includes('@')), "El email debe tener una @."], // Funcion a evaluar - mensaje de error
+  password: [(value) => (value.length >= 6), "La clave debe tener más de 6 caracteres"]
+}
+
 export const LoginPage = () => {
 
   const {status} = useSelector(state => state.auth);
@@ -18,7 +23,7 @@ export const LoginPage = () => {
   const {formState, onInputChange} = useForm( {
     email: '',
     password: ''
-  })
+  }, formValidations)
 
   const {email, password} = formState;
 

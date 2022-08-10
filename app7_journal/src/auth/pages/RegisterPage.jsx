@@ -1,8 +1,10 @@
 import { Google } from "@mui/icons-material"
 import { Button, Grid, Link, TextField, Typography } from "@mui/material"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { Link as RouterLink } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
+import { registerUser } from "../../store/auth/thunks"
 import { AuthLayout } from "../layout/AuthLayout"
 
 // Comprobaciones de los campos del formulario
@@ -25,13 +27,13 @@ export const RegisterPage = () => {
 
   const [formSubmitted, setformSubmitted] = useState(false); // Para la primera vez, que no compruebe los campos porque están vacíos
 
-
+  const dispatch = useDispatch();
   const onSubmit = (event) => {
     event.preventDefault();
     setformSubmitted(true);
 
     if (isFormValid) {
-      
+      dispatch(registerUser(email, password, displayName));
     }
     // dispatch(checkingUser({email, password}));
 
@@ -46,20 +48,20 @@ export const RegisterPage = () => {
 
             <Grid item xs={12} sx={{mb:1}}>
               <TextField label="Nombre completo" type="text" placeholder="Nombre" name="displayName" value={displayName} onChange={onInputChange} 
-              error={((displayNameValid && formSubmitted) ? true: false )} helperText={displayNameValid} // Confirmamos si los campos son correctos
+              error={((displayNameValid && formSubmitted) ? true: false )} helperText={displayNameValid && formSubmitted} // Confirmamos si los campos son correctos
               fullWidth />
             </Grid> {/* Grid item nombre */}
 
             {/* Para poner el correo */}
             <Grid item xs={12} sx={{mb:1}}>
               <TextField label="Correo" type="email" placeholder="ejemplo@ejemplo.com" name="email" value={email} onChange={onInputChange} 
-              error={((emailValid && formSubmitted) ? true: false )} helperText={emailValid}
+              error={((emailValid && formSubmitted) ? true: false )} helperText={emailValid && formSubmitted}
               fullWidth />
             </Grid> {/* Grid item correo */}
 
             <Grid item xs={12}>      
               <TextField label="Contraseña" type="password" placeholder="Contraseña..." name="password" value={password} onChange={onInputChange}
-              error={((passwordValid && formSubmitted) ? true: false )} helperText={passwordValid}
+              error={((passwordValid && formSubmitted) ? true: false )} helperText={passwordValid && formSubmitted}
               fullWidth />
             </Grid> {/* Grid item contraseña */}
 
