@@ -1,4 +1,6 @@
-import { loginGoogle, registerUserEmailPassword } from "../../firebase/providers"
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseAuth } from "../../firebase/config";
+import { loginGoogle, loginUserEmailPassword, registerUserEmailPassword } from "../../firebase/providers"
 import { checkingAuth, login, logout } from "./authSlice"
 
 export const checkingUser = (email, password) => {
@@ -37,5 +39,22 @@ export const registerUser = (email, password, displayName) => {
         else {
             return dispatch(logout(resp.errorMessage));
         }
+    }
+}
+
+export const loginUserEP = (email, password) => {
+    // signinWithEmailandPassword
+    return async(dispatch) => {
+        dispatch(checkingAuth()); // Cambia el estado a 'checking'
+
+        const resp = await loginUserEmailPassword(email, password);
+        const {ok, uid, photoURL, displayName} = resp;
+
+        if (ok) {
+            return dispatch(login({uid, displayName, email, photoURL}));
+        }
+        else {
+            return dispatch(logout(resp.errorMessage));
+        } 
     }
 }

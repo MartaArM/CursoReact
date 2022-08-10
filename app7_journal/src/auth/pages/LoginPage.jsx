@@ -1,10 +1,10 @@
 import { Google } from "@mui/icons-material"
-import { Button, Grid, Link, TextField, Typography } from "@mui/material"
-import { useMemo } from "react"
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material"
+import { useMemo, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link as RouterLink } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
-import { checkingUser, startGoogleLogin } from "../../store/auth/thunks"
+import { checkingUser, loginUserEP, startGoogleLogin } from "../../store/auth/thunks"
 import { AuthLayout } from "../layout/AuthLayout"
 
 const formValidations = {
@@ -14,11 +14,11 @@ const formValidations = {
 
 export const LoginPage = () => {
 
-  const {status} = useSelector(state => state.auth);
+  const {status, errorMessage} = useSelector(state => state.auth);
   
   // const isAuthenticating =  useMemo( () => {((status == 'checking') ? true : false)}, [status]); 
   const isAuthenticating = useMemo ( () => ((status == 'checking') ? true : false), [status]); // Memorizamos el status si no cambia
- 
+
 
   const {formState, onInputChange} = useForm( {
     email: '',
@@ -32,8 +32,8 @@ export const LoginPage = () => {
   // Botón de login
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(checkingUser({email, password}));
-
+    // dispatch(checkingUser({email, password}));
+    dispatch(loginUserEP(email, password));
   }
 
   //Botón de login con google
@@ -57,6 +57,13 @@ export const LoginPage = () => {
             </Grid> {/* Grid item contraseña */}
 
             <Grid container spacing={2} sx={{mb: 2, mt:2}}>
+
+              <Grid item xs={12} 
+              display={ (errorMessage != null) ? '' : 'none'}>
+                <Alert severity='error'>
+                  {errorMessage}
+                </Alert>
+              </Grid>
 
               {/* Boton de login */}
               <Grid item xs={12} sm={6}>
