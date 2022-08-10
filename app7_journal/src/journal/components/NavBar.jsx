@@ -7,9 +7,7 @@ export const NavBar = () => {
 
     const dispatch = useDispatch();
 
-    
-
-    const onClick = (event) => {
+    const onLogout = (event) => {
         event.preventDefault();
         dispatch(logoutUs());
     }
@@ -36,7 +34,7 @@ export const NavBar = () => {
                     Journal App
                 </Typography>
 
-                <IconButton onClick={onClick} sx = {{color: 'white'}}>
+                <IconButton onClick={onLogout} sx = {{color: 'white'}}>
                     <LogoutOutlined />
                 </IconButton>
             </Grid>
