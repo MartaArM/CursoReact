@@ -1,7 +1,8 @@
-import { TurnedInNot } from '@mui/icons-material'
-import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+
+import { Box, Divider, Drawer, List, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux';
+import { ListNotes } from './ListNotes';
 
 export const SideBar = () => {
 
@@ -35,21 +36,7 @@ export const SideBar = () => {
             <List>
                 {
                     notes.map ((nota) => (
-                        
-                        <ListItem key={ nota.id } disablePadding>
-                            <ListItemButton>
-                                {/* Icono de la lista */}
-                                <ListItemIcon>
-                                    <TurnedInNot />
-                                </ListItemIcon>
-                                {/* Elementos de la lista */}
-                                <Grid container>
-                                    <ListItemText primary= {nota.title} />
-                                    <ListItemText secondary={nota.body} />
-                                </Grid>
-                            </ListItemButton>
-
-                        </ListItem>
+                        <ListNotes key={nota.id} nota={nota} />
                     ))
                 }
             </List>
