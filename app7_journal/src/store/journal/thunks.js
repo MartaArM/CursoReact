@@ -1,5 +1,6 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { firebaseDB } from "../../firebase/config";
+import { loadNotes } from "../../helpers/loadNotes";
 import { addNewEmptyNote, savingNewNote, setActiveNote } from "./journalSlice";
 
 export const startNewNote = () => { // Crear una nota cuando hagan click en el boton del +
@@ -25,5 +26,12 @@ export const startNewNote = () => { // Crear una nota cuando hagan click en el b
         dispatch(setActiveNote(newNote));
         
 
+    }
+}
+
+export const startLoadingNotes = () => {
+    return async (dispatch, getState) => {
+        const { uid } = getState().auth;
+        await loadNotes(uid);
     }
 }

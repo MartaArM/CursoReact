@@ -18,9 +18,10 @@ export const JournalPage = () => {
     // <Typography </JournalLayout>variant='h1'>JournalPage</Typography> // variant te pone para poner el estilo del elemento
     <JournalLayout >
       {
-        (activeNote == null) ? 
-        <NoteView/> : 
-        <NothingSelectedView />
+        (activeNote == null) ? // Si no tenemos una nota activa, mostramos la pantalla de mostrar todas las notas
+        <NothingSelectedView /> :
+        <NoteView/>
+        
       }
       
       {/* Botón de + (añadir nota) */}
