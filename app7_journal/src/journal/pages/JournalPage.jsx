@@ -1,6 +1,6 @@
 import { AddOutlined } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startNewNote } from '../../store/journal/thunks';
 import { JournalLayout } from '../layout/JournalLayout';
 import { NoteView } from '../view/NoteView';
@@ -8,6 +8,7 @@ import { NothingSelectedView } from '../view/NothingSelectedView';
 
 export const JournalPage = () => {
   const dispatch = useDispatch();
+  const {isSaving, activeNote} = useSelector(state => state.journal);
 
   const onNewNote = () => {
     dispatch(startNewNote());
@@ -16,10 +17,16 @@ export const JournalPage = () => {
   return (
     // <Typography </JournalLayout>variant='h1'>JournalPage</Typography> // variant te pone para poner el estilo del elemento
     <JournalLayout >
-      {/* <NothingSelectedView /> */}
-      <NoteView/>
+      {
+        (activeNote == null) ? 
+        <NoteView/> : 
+        <NothingSelectedView />
+      }
+      
       {/* Botón de + (añadir nota) */}
       <IconButton 
+      onClick = {onNewNote}
+      disabled={isSaving}
       size='large'
       sx={{
         color: 'white',
