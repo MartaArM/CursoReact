@@ -1,16 +1,24 @@
 import { AddOutlined } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { startNewNote } from '../../store/journal/thunks';
 import { JournalLayout } from '../layout/JournalLayout';
 import { NoteView } from '../view/NoteView';
 import { NothingSelectedView } from '../view/NothingSelectedView';
 
 export const JournalPage = () => {
+  const dispatch = useDispatch();
+
+  const onNewNote = () => {
+    dispatch(startNewNote());
+  }
+
   return (
     // <Typography </JournalLayout>variant='h1'>JournalPage</Typography> // variant te pone para poner el estilo del elemento
-    <JournalLayout className="animate__animated animate__bounce">
+    <JournalLayout >
       {/* <NothingSelectedView /> */}
       <NoteView/>
-
+      {/* Botón de + (añadir nota) */}
       <IconButton 
       size='large'
       sx={{
