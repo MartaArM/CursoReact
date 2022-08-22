@@ -1,6 +1,8 @@
 import { SaveOutlined } from "@mui/icons-material"
 import { Button, Grid, TextField, Typography, useFormControl } from "@mui/material"
+import { useMemo } from "react"
 import { useSelector } from "react-redux"
+import { month_string } from "../../helpers/getMonthString"
 import { useForm } from "../../hooks/useForm"
 import { ImageGallery } from "../components/ImageGallery"
 
@@ -11,13 +13,21 @@ export const NoteView = () => {
 
     const {body, title, date} = formState;
 
-    // console.log(body);
+    const dateString = useMemo( () => {
+        const date_format = new Date(date);
+        const day = date_format.getDate();
+        const month = month_string(date_format.getMonth());
+        const year = date_format.getFullYear();
+        
+        return day + " de " + month + ", " + year;
+    }, [date]);
+
 
   return (
     <Grid container direction='row' justifyContent='space-between' alignItems='center' sx={{mb:1}}>
         <Grid item>
             <Typography fontSize={39} fontWeight='light'>
-                28 de agosto, 2023
+                {dateString}
             </Typography>
         </Grid>
 
