@@ -7,6 +7,11 @@ import { useForm } from "../../hooks/useForm"
 import { checkingUser, loginUserEP, startGoogleLogin } from "../../store/auth/thunks"
 import { AuthLayout } from "../layout/AuthLayout"
 
+const initialState = {
+  email: '',
+  password:''
+}
+
 const formValidations = {
   email: [(value) => (value.includes('@')), "El email debe tener una @."], // Funcion a evaluar - mensaje de error
   password: [(value) => (value.length >= 6), "La clave debe tener más de 6 caracteres"]
@@ -20,10 +25,7 @@ export const LoginPage = () => {
   const isAuthenticating = useMemo ( () => ((status == 'checking') ? true : false), [status]); // Memorizamos el status si no cambia
 
 
-  const {formState, onInputChange} = useForm( {
-    email: '',
-    password: ''
-  }, formValidations)
+  const {formState, onInputChange} = useForm( initialState, formValidations);
 
   const {email, password} = formState;
 
