@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-export const useForm = (initialForm = {}, formValidations) => {
+export const useForm = (initialForm = {}, formValidations=[]) => {
     // Con formValidations vamos a comprobar si un campo es correcto o no
 
     const [formState, setFormState] = useState( initialForm );
