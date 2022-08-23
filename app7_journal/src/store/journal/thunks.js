@@ -1,8 +1,8 @@
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { firebaseDB } from "../../firebase/config";
 import { imageUpload } from "../../helpers/imageUpload";
 import { loadNotes } from "../../helpers/loadNotes";
-import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving, updatedNotes, uploadImages } from "./journalSlice";
+import { addNewEmptyNote, deleteNote, savingNewNote, setActiveNote, setNotes, setSaving, updatedNotes, uploadImages } from "./journalSlice";
 
 export const startNewNote = () => { // Crear una nota cuando hagan click en el boton del +
     return async(dispatch, getState) => {
@@ -32,7 +32,7 @@ export const startNewNote = () => { // Crear una nota cuando hagan click en el b
 }
 
 export const startLoadingNotes = () => {
-    return async (dispatch, getState) => {
+    return async(dispatch, getState) => {
         const { uid } = getState().auth; // ID del usuario para el path de la nota que hay que guardar
         const notes = await loadNotes(uid);
 
@@ -41,7 +41,7 @@ export const startLoadingNotes = () => {
 }
 
 export const startSavingNote = () => {
-    return async (dispatch, getState) => {
+    return async(dispatch, getState) => {
 
         dispatch(setSaving());
 
@@ -60,8 +60,9 @@ export const startSavingNote = () => {
     }
 }
 
+// Cargar imagenes en la nota y en cloudinary
 export const startLoadingImages = (files = []) => { // Le pasamos el array de imágenes
-    return async (dispatch, getState) => {
+    return async(dispatch, getState) => {
         dispatch(setSaving());
 
         // await imageUpload(files[0]);
@@ -72,9 +73,20 @@ export const startLoadingImages = (files = []) => { // Le pasamos el array de im
         }
 
         const imagesURLS = await Promise.all(imageUploadPromises); // Ejecutamos todas las promesas a la vez, asi se cargan todas las imágenes a la vez y no de una en una
-        console.log(imagesURLS);
 
         dispatch(uploadImages(imagesURLS));
 
+    }
+}
+
+export const startDeletingNote = () => {
+    return async(dispatch, getState) => {
+        const { uid } = getState().auth;
+        const { activeNote } = getState().journal;
+
+        const delDoc = doc( firebaseDB, uid + "/journal/notes/" + activeNote.id);
+
+        await deleteDoc(delDoc);
+        dispatch(deleteNote(activeNote.id));
     }
 }

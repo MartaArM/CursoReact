@@ -28,7 +28,6 @@ export const journalSlice = createSlice({
     },
     setNotes: (state, action) => {
         state.notes = action.payload;
-        state.activeNote = null;
     },
     setSaving: (state, action) => {
       state.isSaving = true;
@@ -47,6 +46,10 @@ export const journalSlice = createSlice({
       state.messageSaved = "Nota actualizada correctamente.";
     },
     deleteNote: (state, action) => {
+      state.messageSaved = "Nota eliminada correctamente."
+      state.activeNote = null;
+      state.notes = state.notes.filter( nota => nota.id != action.payload );
+      
     },
     uploadImages: (state, action) => {
       state.activeNote.imageURLs = [...state.activeNote.imageURLs, ...action.payload]; // Antiguas imágenes y las nuevas

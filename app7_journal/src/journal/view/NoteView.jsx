@@ -1,4 +1,4 @@
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material"
+import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material"
 import { Button, Grid, IconButton, TextField, Typography, useFormControl } from "@mui/material"
 import { useEffect, useRef } from "react"
 import { useMemo } from "react"
@@ -7,7 +7,7 @@ import Swal from "sweetalert2"
 import { month_string } from "../../helpers/getMonthString"
 import { useForm } from "../../hooks/useForm"
 import { setActiveNote } from "../../store/journal/journalSlice"
-import { startLoadingImages, startSavingNote } from "../../store/journal/thunks"
+import { startDeletingNote, startLoadingImages, startSavingNote } from "../../store/journal/thunks"
 import { ImageGallery } from "../components/ImageGallery"
 
 export const NoteView = () => {
@@ -41,6 +41,8 @@ export const NoteView = () => {
      }, [messageSaved]) // Cuando cambia el mensaje (cuando guardamos una nota)
 
     const fileInputRef = useRef();
+
+    // Funciones
     
     const onSaveNote = () => {
         dispatch(startSavingNote());
@@ -53,6 +55,13 @@ export const NoteView = () => {
         }
     }
 
+    const onDeleteNote = () => {
+        dispatch(startDeletingNote());
+        Swal.fire({ // Nueva herramienta para lanzar un mensaje
+            icon: 'success',
+            title: "Nota eliminada correctamente."
+        })
+    }
 
     return (
         <Grid container direction='row' justifyContent='space-between' alignItems='center' sx={{mb:1}}>
@@ -112,6 +121,17 @@ export const NoteView = () => {
                 onChange={onInputChange}
                 minRows={8}/>
             </Grid>
+
+            <Grid container justifyContent='end'>
+                <Button
+                    sx={{color: 'black'}}
+                    onClick={onDeleteNote}
+                >
+                    <DeleteOutline />
+                    Borrar
+                </Button>
+            </Grid>
+
 
             <ImageGallery />
 
