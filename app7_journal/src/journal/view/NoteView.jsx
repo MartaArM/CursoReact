@@ -3,6 +3,7 @@ import { Button, Grid, TextField, Typography, useFormControl } from "@mui/materi
 import { useEffect } from "react"
 import { useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import Swal from "sweetalert2"
 import { month_string } from "../../helpers/getMonthString"
 import { useForm } from "../../hooks/useForm"
 import { setActiveNote } from "../../store/journal/journalSlice"
@@ -13,7 +14,7 @@ export const NoteView = () => {
 
     const dispatch = useDispatch();
 
-    const {activeNote} = useSelector(state => state.journal);
+    const {activeNote, messageSaved, isSaving} = useSelector(state => state.journal);
     const {formState, onInputChange} = useForm(activeNote); // Cogemos los datos de la nota activa
 
     const {body, title, date} = formState;
@@ -28,10 +29,19 @@ export const NoteView = () => {
     }, [date]);
 
     useEffect(() => {
-       dispatch(setActiveNote(formState));
+       dispatch(setActiveNote(formState)); // Cambiamos la nota activa cuando seleccioanmos una
     }, [formState]) // Cuando escribimos en la nota
+
+    useEffect(() => {
+        if (messageSaved.length > 0)
+            Swal.fire({ // Nueva herramienta para lanzar un mensaje
+                icon: 'success',
+                title: messageSaved
+            })
+     }, [messageSaved]) // Cuando cambia el mensaje (cuando guardamos una nota)
     
     const onSaveNote = () => {
+        
         dispatch(startSavingNote());
     }
 
@@ -45,7 +55,7 @@ export const NoteView = () => {
         </Grid>
 
         <Grid item>
-            <Button onClick= {onSaveNote}>
+            <Button onClick= {onSaveNote} disabled= {isSaving}>
                 <SaveOutlined sx={{ fontSize: 30, mr: 1}} />
                 Guardar
             </Button>
