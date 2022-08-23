@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../../firebase/config";
 import { loginGoogle, loginUserEmailPassword, logoutUser, registerUserEmailPassword } from "../../firebase/providers"
+import { clearLogout } from "../journal/journalSlice";
 import { checkingAuth, login, logout } from "./authSlice"
 
 export const checkingUser = (email, password) => {
@@ -65,7 +66,8 @@ export const logoutUs = () => {
         const resp = await logoutUser();
 
         if (resp.ok) {
-            return dispatch(logout());
+            dispatch(clearLogout());
+            dispatch(logout());
         }
     }
 }
