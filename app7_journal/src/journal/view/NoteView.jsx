@@ -1,19 +1,24 @@
 import { SaveOutlined } from "@mui/icons-material"
 import { Button, Grid, TextField, Typography, useFormControl } from "@mui/material"
+import { useEffect } from "react"
 import { useMemo } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { month_string } from "../../helpers/getMonthString"
 import { useForm } from "../../hooks/useForm"
+import { setActiveNote } from "../../store/journal/journalSlice"
+import { startSavingNote } from "../../store/journal/thunks"
 import { ImageGallery } from "../components/ImageGallery"
 
 export const NoteView = () => {
 
+    const dispatch = useDispatch();
+
     const {activeNote} = useSelector(state => state.journal);
-    const {formState, onInputChange} = useForm(activeNote);
+    const {formState, onInputChange} = useForm(activeNote); // Cogemos los datos de la nota activa
 
     const {body, title, date} = formState;
 
-    const dateString = useMemo( () => {
+    const dateString = useMemo( () => { // Fecha que va en el título de la nota
         const date_format = new Date(date);
         const day = date_format.getDate();
         const month = month_string(date_format.getMonth());
@@ -21,6 +26,14 @@ export const NoteView = () => {
         
         return day + " de " + month + ", " + year;
     }, [date]);
+
+    useEffect(() => {
+       dispatch(setActiveNote(formState));
+    }, [formState]) // Cuando escribimos en la nota
+    
+    const onSaveNote = () => {
+        dispatch(startSavingNote());
+    }
 
 
   return (
@@ -32,7 +45,7 @@ export const NoteView = () => {
         </Grid>
 
         <Grid item>
-            <Button>
+            <Button onClick= {onSaveNote}>
                 <SaveOutlined sx={{ fontSize: 30, mr: 1}} />
                 Guardar
             </Button>
