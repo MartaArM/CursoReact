@@ -6,6 +6,7 @@ import { localizer } from "../../helpers/calendarLocalizer"
 import { getMessages } from "../../helpers/getMessages"
 import { EventBox } from "../components/EventBox"
 import { useState } from 'react'
+import { EventView } from '../components/EventView'
 
 const events = [{
   title: 'Cumpleaños',
@@ -68,6 +69,8 @@ export const CalendarPage = () => {
           onView={onViewChanged}
           defaultView={lastView}
         />
+
+        <EventView />
 
       </>
     )
