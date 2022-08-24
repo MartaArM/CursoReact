@@ -5,6 +5,7 @@ import {addHours} from 'date-fns'
 import { localizer } from "../../helpers/calendarLocalizer"
 import { getMessages } from "../../helpers/getMessages"
 import { EventBox } from "../components/EventBox"
+import { useState } from 'react'
 
 const events = [{
   title: 'Cumpleaños',
@@ -19,6 +20,9 @@ const events = [{
 
 export const CalendarPage = () => {
 
+
+  const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month')
+
     const eventStyleGetter = (event, start, end, isSelected) => {
       const style= {
         backgroundColor: '#29e6b6',
@@ -29,6 +33,19 @@ export const CalendarPage = () => {
         style
       }
     }
+
+    const onDoubleClick = (event) => {
+      console.log( {doubleClick: event});
+    }
+
+    const onClick = (event) => {
+      console.log( {click: event})
+    }
+
+    const onViewChanged = (event) => {
+      localStorage.setItem('lastView', event);
+    }
+
 
     return (
       <>
@@ -46,6 +63,10 @@ export const CalendarPage = () => {
           components={{ // Ponemos el componente nuevo que hemos creado para darle estilo
             event: EventBox
           }}
+          onDoubleClickEvent={onDoubleClick}
+          onSelectEvent={onClick}
+          onView={onViewChanged}
+          defaultView={lastView}
         />
 
       </>
