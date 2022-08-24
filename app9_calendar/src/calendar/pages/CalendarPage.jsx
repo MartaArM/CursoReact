@@ -1,5 +1,9 @@
+import { NavBar } from "../components/NavBar"
+
 export const CalendarPage = () => {
   return (
-    <h1>CalendarPage</h1>
+    <>
+      <NavBar />
+    </>
   )
 }
