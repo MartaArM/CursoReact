@@ -1,11 +1,13 @@
 import "react-datepicker/dist/react-datepicker.css";
+import 'sweetalert2/src/sweetalert2.scss'
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Modal from "react-modal";
 import DatePicker, {registerLocale} from "react-datepicker";
 import { useForm } from "../../hooks/useForm";
-// import { addHours, startOfDay } from "date-fns";
 import es from 'date-fns/locale/es';
+import { differenceInSeconds } from "date-fns";
+import Swal from "sweetalert2";
 registerLocale('es', es)
 
 
@@ -32,13 +34,56 @@ Modal.setAppElement('#root');
 export const EventView = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  const [formSubmitted, setformSubmitted] = useState(false); // Verdadero si le damos al botón de guardar
 
   const {formState, onInputChange, onDateChanged} = useForm(initialState);
   const {title, notes, start, end} = formState;
 
+  // Si ya le hemos dado al botón de guardar y el título está vacío, el campo del título de pone en rojo
+  const titleClass = useMemo(() => {
+
+    if (!formSubmitted) return '';
+
+    return (title.length > 0)
+    ? ''
+    : 'is-invalid'
+    
+  }, [title, formSubmitted])
+
   const onCloseModal = () => {
     console.log("Cerrando modal");
     setIsOpen(false);
+  }
+
+  // Se ejecuta cuando se manda la información al formulario
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setformSubmitted(true);
+
+    const date_diff = differenceInSeconds(end, start);
+    
+    // Mensajes de error si los datos no están correctos
+    if (!isNaN(date_diff) && date_diff > 0 ) {
+      
+      if (title.length > 0) {
+
+      }
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El título no puede ser vacío'
+        })
+      }
+
+    }
+    else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Las fechas no son correctas'
+      })
+    }
   }
   
   return (
@@ -52,7 +97,7 @@ export const EventView = () => {
     >
       <h1> Nuevo evento </h1>
       <hr />
-      <form className="container">
+      <form className="container" onSubmit={onSubmit}>
 
           <div className="form-group mb-2">
               <label>Fecha y hora inicio</label>
@@ -87,7 +132,7 @@ export const EventView = () => {
               <label>Titulo y notas</label>
               <input 
                   type="text" 
-                  className="form-control"
+                  className= {"form-control " + titleClass}
                   placeholder="Título del evento"
                   name="title"
                   autoComplete="off"
