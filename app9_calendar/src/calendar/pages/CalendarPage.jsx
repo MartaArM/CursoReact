@@ -7,6 +7,7 @@ import { getMessages } from "../../helpers/getMessages"
 import { EventBox } from "../components/EventBox"
 import { useState } from 'react'
 import { EventView } from '../components/EventView'
+import { useUIStore } from '../../hooks/useUIStore'
 
 const events = [{
   title: 'Cumpleaños',
@@ -21,57 +22,59 @@ const events = [{
 
 export const CalendarPage = () => {
 
+  const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');
 
-  const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month')
+  const {isModalOpen, openModal} = useUIStore();
 
-    const eventStyleGetter = (event, start, end, isSelected) => {
-      const style= {
-        backgroundColor: '#29e6b6',
-        color: 'black'
-      }
-
-      return {
-        style
-      }
-    } 
- 
-    const onDoubleClick = (event) => {
-      console.log( {doubleClick: event});
+  const eventStyleGetter = (event, start, end, isSelected) => {
+    const style= {
+      backgroundColor: '#29e6b6',
+      color: 'black'
     }
 
-    const onClick = (event) => {
-      console.log( {click: event})
+    return {
+      style
     }
+  } 
 
-    const onViewChanged = (event) => {
-      localStorage.setItem('lastView', event);
-    }
+  const onDoubleClick = (event) => {
+    console.log( {doubleClick: event});
+    openModal();
+  }
+
+  const onClick = (event) => {
+    console.log( {click: event})
+  }
+
+  const onViewChanged = (event) => {
+    localStorage.setItem('lastView', event);
+  }
 
 
-    return (
-      <>
-        <NavBar />
+  return (
+    <>
+      <NavBar />
 
-        <Calendar
-          culture="es"
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 'calc( 100vh - 80px )' }} // El 100% de la vista - 80 pixeles de la barra de navegación
-          messages={getMessages()}
-          eventPropGetter={eventStyleGetter}
-          components={{ // Ponemos el componente nuevo que hemos creado para darle estilo
-            event: EventBox
-          }}
-          onDoubleClickEvent={onDoubleClick}
-          onSelectEvent={onClick}
-          onView={onViewChanged}
-          defaultView={lastView}
-        />
+      <Calendar
+        culture="es"
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 'calc( 100vh - 80px )' }} // El 100% de la vista - 80 pixeles de la barra de navegación
+        messages={getMessages()}
+        eventPropGetter={eventStyleGetter}
+        components={{ // Ponemos el componente nuevo que hemos creado para darle estilo
+          event: EventBox
+        }}
+        onDoubleClickEvent={onDoubleClick}
+        onSelectEvent={onClick}
+        onView={onViewChanged}
+        defaultView={lastView}
+      />
 
-        <EventView />
+      <EventView />
 
-      </>
-    )
+    </>
+  )
 }

@@ -8,6 +8,8 @@ import { useForm } from "../../hooks/useForm";
 import es from 'date-fns/locale/es';
 import { differenceInSeconds } from "date-fns";
 import Swal from "sweetalert2";
+import { useUIStore } from "../../hooks/useUIStore";
+
 registerLocale('es', es)
 
 
@@ -33,8 +35,9 @@ Modal.setAppElement('#root');
 
 export const EventView = () => {
 
-  const [isOpen, setIsOpen] = useState(true);
   const [formSubmitted, setformSubmitted] = useState(false); // Verdadero si le damos al botón de guardar
+
+  const {isModalOpen, openModal, closeModal} = useUIStore();
 
   const {formState, onInputChange, onDateChanged} = useForm(initialState);
   const {title, notes, start, end} = formState;
@@ -50,9 +53,10 @@ export const EventView = () => {
     
   }, [title, formSubmitted])
 
+  // Cerrar el evento
   const onCloseModal = () => {
     console.log("Cerrando modal");
-    setIsOpen(false);
+    closeModal();
   }
 
   // Se ejecuta cuando se manda la información al formulario
@@ -88,7 +92,7 @@ export const EventView = () => {
   
   return (
     <Modal
-      isOpen={isOpen}
+      isOpen={isModalOpen}
       onRequestClose={onCloseModal}
       style={customStyles}
       className="modal"
