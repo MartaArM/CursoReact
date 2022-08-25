@@ -2,9 +2,12 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { useState } from "react";
 import Modal from "react-modal";
-import DatePicker from "react-datepicker";
+import DatePicker, {registerLocale} from "react-datepicker";
 import { useForm } from "../../hooks/useForm";
-import { addHours, startOfDay } from "date-fns";
+// import { addHours, startOfDay } from "date-fns";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
+
 
 const customStyles = {
   content: {
@@ -58,6 +61,9 @@ export const EventView = () => {
                 onChange={(event) => onDateChanged(event, 'start')} 
                 className='form-control'
                 dateFormat="Pp"
+                showTimeSelect
+                locale="es"
+                timeCaption="Hora"
                 /> 
 
           </div>
@@ -65,11 +71,14 @@ export const EventView = () => {
           <div className="form-group mb-2">
               <label>Fecha y hora fin</label>
               <DatePicker 
-                minDate={start}
+                minDate={start} // No se puede elegir una hora anterior a la de empezar
                 selected={end} 
                 onChange={(event) => onDateChanged(event, 'end')} 
                 className='form-control'
                 dateFormat="Pp"
+                showTimeSelect // Para elegir la hora
+                locale="es" // Idioma español
+                timeCaption="Hora"
                 /> 
           </div>
 
