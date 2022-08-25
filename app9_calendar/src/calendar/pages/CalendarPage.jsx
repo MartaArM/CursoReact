@@ -33,8 +33,8 @@ export const CalendarPage = () => {
       return {
         style
       }
-    }
-
+    } 
+ 
     const onDoubleClick = (event) => {
       console.log( {doubleClick: event});
     }

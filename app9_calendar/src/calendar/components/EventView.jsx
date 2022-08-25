@@ -18,10 +18,10 @@ const customStyles = {
 };
 
 const initialState = {
-  title: 'Título',
-  notes: 'Notas',
-  start: new Date(),
-  end: addHours(new Date(), 2)
+  title: '',
+  notes: '',
+  start: null,//new Date(),
+  end: null// addHours(new Date(), 2)
 }
 
 Modal.setAppElement('#root');
@@ -30,14 +30,14 @@ export const EventView = () => {
 
   const [isOpen, setIsOpen] = useState(true);
 
-  const {formState, onInputChange} = useForm(initialState);
+  const {formState, onInputChange, onDateChanged} = useForm(initialState);
   const {title, notes, start, end} = formState;
 
   const onCloseModal = () => {
     console.log("Cerrando modal");
     setIsOpen(false);
   }
-
+  
   return (
     <Modal
       isOpen={isOpen}
@@ -53,16 +53,24 @@ export const EventView = () => {
 
           <div className="form-group mb-2">
               <label>Fecha y hora inicio</label>
-              <DatePicker name='start' selected={start} onChange={onInputChange} className='form-control'/> 
+              <DatePicker // Para elegir la fecha
+                selected={start} 
+                onChange={(event) => onDateChanged(event, 'start')} 
+                className='form-control'
+                dateFormat="Pp"
+                /> 
 
           </div>
 
           <div className="form-group mb-2">
               <label>Fecha y hora fin</label>
-              <input className="form-control" placeholder="Fecha fin"
-              name='end'
-              onChange={onInputChange}
-              />
+              <DatePicker 
+                minDate={start}
+                selected={end} 
+                onChange={(event) => onDateChanged(event, 'end')} 
+                className='form-control'
+                dateFormat="Pp"
+                /> 
           </div>
 
           <hr />
@@ -87,6 +95,7 @@ export const EventView = () => {
                   placeholder="Notas"
                   rows="5"
                   name="notes"
+                  value={notes}
                   onChange={onInputChange}
               ></textarea>
               <small id="emailHelp" className="form-text text-muted">Información adicional</small>
