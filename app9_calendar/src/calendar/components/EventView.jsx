@@ -37,7 +37,7 @@ export const EventView = () => {
 
   const [formSubmitted, setformSubmitted] = useState(false); // Verdadero si le damos al botón de guardar
 
-  const {isModalOpen, openModal, closeModal} = useUIStore();
+  const {isModalOpen,  closeModal} = useUIStore();
 
   const {formState, onInputChange, onDateChanged} = useForm(initialState);
   const {title, notes, start, end} = formState;
@@ -55,7 +55,6 @@ export const EventView = () => {
 
   // Cerrar el evento
   const onCloseModal = () => {
-    console.log("Cerrando modal");
     closeModal();
   }
 

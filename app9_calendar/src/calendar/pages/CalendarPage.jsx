@@ -8,23 +8,25 @@ import { EventBox } from "../components/EventBox"
 import { useState } from 'react'
 import { EventView } from '../components/EventView'
 import { useUIStore } from '../../hooks/useUIStore'
+import { useCalendarStore } from '../../hooks/useCalendarStore'
 
-const events = [{
-  title: 'Cumpleaños',
-  notes: 'Hay que comprar tarta',
-  start: new Date(),
-  end: addHours(new Date(), 2),
-  user: {
-    _id: '123',
-    name: 'Marta'
-  }
-}]
+// const events = [{
+//   title: 'Cumpleaños',
+//   notes: 'Hay que comprar tarta',
+//   start: new Date(),
+//   end: addHours(new Date(), 2),
+//   user: {
+//     _id: '123',
+//     name: 'Marta'
+//   }
+// }]
 
 export const CalendarPage = () => {
 
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');
 
   const {isModalOpen, openModal} = useUIStore();
+  const {events} = useCalendarStore();
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style= {
@@ -35,10 +37,11 @@ export const CalendarPage = () => {
     return {
       style
     }
-  } 
+  }
+
+  // Eventos
 
   const onDoubleClick = (event) => {
-    console.log( {doubleClick: event});
     openModal();
   }
 
