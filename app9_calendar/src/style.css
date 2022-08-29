@@ -62,3 +62,14 @@ code {
   background-color: #29e6b6 !important;
   border-color: #29e6b6 !important;
 }
+
+.fab-trash {
+  border-radius: 100%;
+  bottom: 25px;
+  font-size: 20px;
+  padding: 15px;
+  position: fixed;
+  left: 40px;
+  background-color: red !important;
+  border-color: red !important;
+}

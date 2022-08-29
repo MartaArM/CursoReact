@@ -10,6 +10,7 @@ import { EventView } from '../components/EventView'
 import { useUIStore } from '../../hooks/useUIStore'
 import { useCalendarStore } from '../../hooks/useCalendarStore'
 import { ButtonAddNew } from '../components/ButtonAddNew'
+import { ButtonDelete } from '../components/ButtonDelete'
 
 // const events = [{
 //   title: 'Cumpleaños',
@@ -79,6 +80,7 @@ export const CalendarPage = () => {
 
       <EventView />
       <ButtonAddNew />
+      <ButtonDelete />
 
     </>
   )
