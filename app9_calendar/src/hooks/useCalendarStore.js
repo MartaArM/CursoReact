@@ -11,6 +11,7 @@ export const useCalendarStore = () => {
 
     return {
         events,
+        activeEvent,
         setActiveEvent
     }
 }

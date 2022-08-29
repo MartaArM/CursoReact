@@ -25,10 +25,17 @@ export const useForm = (initialForm = {}) => {
       });
    }
 
+   const onChangeValues = (activeEvent) => {
+      setFormState( {
+         ...activeEvent
+      })
+   }
+
    return {
       formState,
       onInputChange,
       onResetForm,
       onDateChanged,
+      onChangeValues
    }
 }

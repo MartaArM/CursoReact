@@ -1,14 +1,15 @@
 import "react-datepicker/dist/react-datepicker.css";
 import 'sweetalert2/src/sweetalert2.scss'
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Modal from "react-modal";
 import DatePicker, {registerLocale} from "react-datepicker";
 import { useForm } from "../../hooks/useForm";
 import es from 'date-fns/locale/es';
-import { differenceInSeconds } from "date-fns";
+import { addHours, differenceInSeconds } from "date-fns";
 import Swal from "sweetalert2";
 import { useUIStore } from "../../hooks/useUIStore";
+import { useCalendarStore } from "../../hooks/useCalendarStore";
 
 registerLocale('es', es)
 
@@ -27,8 +28,8 @@ const customStyles = {
 const initialState = {
   title: '',
   notes: '',
-  start: null,//new Date(),
-  end: null// addHours(new Date(), 2)
+  start: new Date(),
+  end: addHours(new Date(), 2)
 }
 
 Modal.setAppElement('#root');
@@ -38,9 +39,10 @@ export const EventView = () => {
   const [formSubmitted, setformSubmitted] = useState(false); // Verdadero si le damos al botón de guardar
 
   const {isModalOpen,  closeModal} = useUIStore();
+  const {activeEvent} = useCalendarStore();
 
-  const {formState, onInputChange, onDateChanged} = useForm(initialState);
-  const {title, notes, start, end} = formState;
+  const {formState, onInputChange, onDateChanged, onChangeValues} = useForm(initialState);
+  let {title, notes, start, end} = formState;
 
   // Si ya le hemos dado al botón de guardar y el título está vacío, el campo del título de pone en rojo
   const titleClass = useMemo(() => {
@@ -52,6 +54,22 @@ export const EventView = () => {
     : 'is-invalid'
     
   }, [title, formSubmitted])
+
+  useEffect(() => {
+    
+
+    if (activeEvent != null) {
+      console.log("entra")
+      onChangeValues(activeEvent);
+      // title = activeEvent.title;
+      // console.log(title)
+      // notes = activeEvent.notes;
+      // start = activeEvent.start;
+      // end = activeEvent.end;
+    }
+  
+  }, [activeEvent])
+  
 
   // Cerrar el evento
   const onCloseModal = () => {
@@ -111,6 +129,7 @@ export const EventView = () => {
                 dateFormat="Pp"
                 showTimeSelect
                 locale="es"
+                value={start}
                 timeCaption="Hora"
                 /> 
 
