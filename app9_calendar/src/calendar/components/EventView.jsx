@@ -59,13 +59,7 @@ export const EventView = () => {
     
 
     if (activeEvent != null) {
-      console.log("entra")
       onChangeValues(activeEvent);
-      // title = activeEvent.title;
-      // console.log(title)
-      // notes = activeEvent.notes;
-      // start = activeEvent.start;
-      // end = activeEvent.end;
     }
   
   }, [activeEvent])

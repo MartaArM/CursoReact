@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { EventView } from '../components/EventView'
 import { useUIStore } from '../../hooks/useUIStore'
 import { useCalendarStore } from '../../hooks/useCalendarStore'
+import { ButtonAddNew } from '../components/ButtonAddNew'
 
 // const events = [{
 //   title: 'Cumpleaños',
@@ -77,6 +78,7 @@ export const CalendarPage = () => {
       />
 
       <EventView />
+      <ButtonAddNew />
 
     </>
   )
