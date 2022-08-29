@@ -9,7 +9,7 @@ export const ButtonAddNew = () => {
 
     const onNewEvent = () => {
         setActiveEvent({
-            title: 'Hola',
+            title: '',
             notes: '',
             start: new Date(),
             end: addHours(new Date(), 2),

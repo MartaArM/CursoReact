@@ -23,6 +23,10 @@ export const calendarSlice = createSlice({
     onSetActiveEvent: (state, {payload}) => {
       state.activeEvent = payload;
     },
+    onAddEvent: (state, {payload}) => {
+      state.events.push(payload);
+      state.activeEvent = null;
+    }
   }
 })
-export const { onSetActiveEvent } = calendarSlice.actions; 
+export const { onSetActiveEvent , onAddEvent } = calendarSlice.actions; 

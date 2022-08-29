@@ -39,10 +39,10 @@ export const EventView = () => {
   const [formSubmitted, setformSubmitted] = useState(false); // Verdadero si le damos al botón de guardar
 
   const {isModalOpen,  closeModal} = useUIStore();
-  const {activeEvent} = useCalendarStore();
+  const {activeEvent, startSavingEvent} = useCalendarStore();
 
   const {formState, onInputChange, onDateChanged, onChangeValues} = useForm(initialState);
-  let {title, notes, start, end} = formState;
+  const {title, notes, start, end} = formState;
 
   // Si ya le hemos dado al botón de guardar y el título está vacío, el campo del título de pone en rojo
   const titleClass = useMemo(() => {
@@ -71,7 +71,7 @@ export const EventView = () => {
   }
 
   // Se ejecuta cuando se manda la información al formulario
-  const onSubmit = (event) => {
+  const onSubmit = async(event) => {
     event.preventDefault();
     setformSubmitted(true);
 
@@ -80,8 +80,10 @@ export const EventView = () => {
     // Mensajes de error si los datos no están correctos
     if (!isNaN(date_diff) && date_diff > 0 ) {
       
-      if (title.length > 0) {
-
+      if (title.length > 0) { // Datos correctos
+        await startSavingEvent(formState);
+        closeModal();
+        setformSubmitted(false);
       }
       else {
         Swal.fire({
