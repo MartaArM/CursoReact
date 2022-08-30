@@ -1,21 +1,41 @@
 // Funciones que se definen en las rutas
 
 const crearUsuario = (req, res) => {
-    res.json({
+
+    // Datos que mandamos en el body
+    const {name, email, password} = req.body;
+
+    if (name.length < 3) {
+        return res.status(400).json({ //Mandamos el status 400 (bad request)
+            ok:false,
+            msg: "El nombre debe tener más de dos letras."
+        });
+    }
+
+
+    return res.json({
         ok: true,
-        msg: 'Crear usuario'
+        msg: 'Crear usuario',
+        name: name,
+        email: email,
+        password: password
     })
 }
 
 const iniciarSesion = (req, res) => {
-    res.json({
+
+    const {email, password} = req.body;
+
+    return res.json({
         ok: true,
-        msg: 'Iniciar sesion'
+        msg: 'Iniciar sesion',
+        email: email,
+        password: password
     })
 }
 
 const renovarToken = (req, res) => {
-    res.json({
+    return res.json({
         ok: true,
         msg: 'Renovar token'
     })

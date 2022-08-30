@@ -5,14 +5,19 @@ require('dotenv').config();
 // Servidor de express
 const app = express();
 
-// Rutas
-// Autenticación de usuario
-app.use('/api/auth', require('./routes/auth'));
-
 // CRUD de eventos
 
 // Directorio publico
 app.use( express.static('public')); //La carpeta pública
+
+// Lectura del body
+app.use( express.json());
+
+// Rutas
+// Autenticación de usuario
+app.use('/api/auth', require('./routes/auth'));
+
+
 
 // Escuchar peticiones
 app.listen(process.env.PORT, () => {
