@@ -4,12 +4,12 @@ import { useUIStore } from "../../hooks/useUIStore"
 
 export const ButtonDelete = () => {
 
-    const {activeEvent, deleteEvent} = useCalendarStore();
-    const {isModalOpen} = useUIStore();
+  const {activeEvent, deleteEvent} = useCalendarStore();
+  const {isModalOpen} = useUIStore();
 
-    const onDeleteEvent = () => {
-        deleteEvent(activeEvent);
-    }
+  const onDeleteEvent = () => {
+      deleteEvent(activeEvent);
+  }
 
   return (
     
