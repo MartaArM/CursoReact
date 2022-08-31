@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Document</title>
+
+   
+</head>
+<body>
+
+    <div id="principal">
+
+    </div>
+
+    <script type="text/babel">
+        // Coger el div que tiene id principal-->
+        const divPrincipal = document.querySelector("#principal");
+        const nombre = "Marta";
+        const h1Tag = <h1>Hola mundo, soy { nombre }</h1>;
+
+        //Meter el h1 en el div
+        ReactDOM.render(h1Tag, divPrincipal);
+    </script>
+    
+</body>
+</html>

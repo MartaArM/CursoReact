@@ -1,0 +1,15 @@
+Hay que configurar el package.json para poder hacer las pruebas.
+
+https://jestjs.io/ -> Software de testing
+
+npm install --save-dev jest -> Se hace en el proyecto y se añade la dependencia sola
+
+"test": "jest --watchAll" -> Hay que añadirlo en el package.json dentro de los scripts
+
+npm test -> Para ejecutar los tests. Dentro del directorio de la aplicación
+
+npm install -D @types/jest -> Se instala en el directorio para que cuando escribamos nos salgan las opciones de funciones que tenemos
+
+npm install --save-dev babel-jest @babel/core @babel/preset-env -> en la carpeta del proyecto. Configuración de babel.
+
+Crear en la carpeta del proyecto (la raiz) el archivo babel.config.js

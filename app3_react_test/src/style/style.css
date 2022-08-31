@@ -1,0 +1,10 @@
+body {
+    background-color: bisque;
+    padding-left: 20px;
+}
+
+button {
+    width: 60px;
+    height: 40px;
+    margin-left: 20px;
+}

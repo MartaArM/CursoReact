@@ -1,0 +1,3 @@
+Hay que configurar el package.json para poder hacer las pruebas.
+
+https://jestjs.io/ -> Software de testing
