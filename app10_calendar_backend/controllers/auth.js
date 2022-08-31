@@ -1,6 +1,7 @@
 // Funciones que se definen en las rutas
 const {validationResult} = require('express-validator');
-const Usuario = require('../models/Usuario')
+const bcrypt = require('bcryptjs');
+const Usuario = require('../models/Usuario');
 
 const crearUsuario = async(req, res) => {
 
@@ -17,6 +18,11 @@ const crearUsuario = async(req, res) => {
         } 
         else { // Si el email no existe
             usuario = new Usuario(req.body); // Creamos un usuario
+
+            //Encriptar la contraseña
+            const salt = bcrypt.genSaltSync();
+            usuario.password = bcrypt.hashSync(password, salt); //Encriptar la contraseña
+
             await usuario.save();// Lo guardamos en la BD
 
             return res.status(201).json({
