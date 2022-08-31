@@ -8,19 +8,27 @@ const crearUsuario = async(req, res) => {
     const {email, password} = req.body;
 
     try {
-        let usuario = await Usuario.findOne({email: email});
-        console.log(usuario);
+        let usuario = await Usuario.findOne({email: email}); // El correo no se puede repetir, buscamos si ya está
+        if (usuario) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El correo ya existe'
+            })
+        } 
+        else { // Si el email no existe
+            usuario = new Usuario(req.body); // Creamos un usuario
+            await usuario.save();// Lo guardamos en la BD
 
-        // const usuario = new Usuario(req.body); // Creamos un usuario
-        // await usuario.save();// Lo guardamos en la BD
+            return res.status(201).json({
+                ok: true,
+                uid: usuario._id,
+                name: usuario.name
+            })
+        }
 
-        return res.status(201).json({
-            ok: true,
-            msg: 'Crear usuario',
-            // name: name,
-            // email: email,
-            // password: password
-        })
+         
+
+        
     } catch (error) {
         console.log(error)
         return res.status(500).json({
