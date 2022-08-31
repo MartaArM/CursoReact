@@ -1,9 +1,13 @@
 const express = require('express');
+const { dbConnection } = require('./database/config');
 // Traemos las variables de entorno
 require('dotenv').config();
 
 // Servidor de express
 const app = express();
+
+// Base de datos
+dbConnection();
 
 // CRUD de eventos
 
