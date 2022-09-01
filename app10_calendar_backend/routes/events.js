@@ -1,40 +1,39 @@
 const {Router} = require('express');
 const { obtenerEventos, crearEvento, actualizarEvento, eliminarEvento } = require('../controllers/events');
+const { validarJWT } = require('../middlewares/validacionJWT');
 
 const router = Router();
+
+router.use(validarJWT); // Como lo tienen que usar todas, se puede poner aqui
 
 //Obtener eventos
 router.get(
     '/', 
-    // Funciones para hacer validaciones
-    // [
-    //     obtenerEventos
-    // ],
+   // [
+     //   validarJWT
+   // ],
     obtenerEventos);
 
     //Crear un nuevo evento
 router.post(
     '/', 
-    // Funciones para hacer validaciones
-    // [
-    //     obtenerEventos
-    // ],
+   // [
+     //   validarJWT
+   // ],
     crearEvento);
 
 router.put(
     '/:id', 
-    // Funciones para hacer validaciones
-    // [
-    //     obtenerEventos
-    // ],
+   // [
+     //   validarJWT
+   // ],
     actualizarEvento);
 
 router.delete(
     '/:id', 
-    // Funciones para hacer validaciones
-    // [
-    //     obtenerEventos
-    // ],
+   // [
+     //   validarJWT
+   // ],
     eliminarEvento);
 
 module.exports = router;
