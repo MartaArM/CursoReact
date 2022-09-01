@@ -14,7 +14,7 @@ dbConnection();
 // CORS
 app.use(cors())
 
-// CRUD de eventos
+
 
 // Directorio publico
 app.use( express.static('public')); //La carpeta pública
@@ -22,9 +22,12 @@ app.use( express.static('public')); //La carpeta pública
 // Lectura del body
 app.use( express.json());
 
-// Rutas
+// RUTAS
 // Autenticación de usuario
 app.use('/api/auth', require('./routes/auth'));
+// CRUD de eventos
+app.use('/api/events', require('./routes/events'));
+
 
 
 
