@@ -3,8 +3,9 @@ const {check} = require('express-validator'); //Para hacer validaciones
 
 const router = Router();
 
-const {crearUsuario, iniciarSesion, renovarToken} = require('../controllers/auth');
+const { crearUsuario, iniciarSesion, renovarToken } = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validacionCampos');
+const { validarJWT } = require('../middlewares/validacionJWT');
 
 // Cuando alguien solicite el localhost:3001/api/auth, que es lo que respondo
 
@@ -33,6 +34,6 @@ router.post('/',
 
 // Renovar token
 // /api/auth/renew
-router.get('/renew', renovarToken)
+router.get('/renew', validarJWT, renovarToken)
 
 module.exports = router;

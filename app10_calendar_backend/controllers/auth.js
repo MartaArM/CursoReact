@@ -94,10 +94,17 @@ const iniciarSesion = async(req, res) => {
     
 }
 
-const renovarToken = (req, res) => {
+const renovarToken = async(req, res) => {
+
+    const uid = req.uid;
+    const name = req.name;
+
+    const token = await generarJWT(uid, name);
+
     return res.json({
         ok: true,
-        msg: 'Renovar token'
+        msg: 'Renovar token',
+        token
     })
 }
 
