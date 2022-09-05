@@ -3,22 +3,23 @@ const {Schema, model} = require('mongoose');
 const EventoSchema = Schema({
     title: {
         type: String,
-        require: true
+        required: true
     },
     notes: {
         type: String
     },
     start: {
         type: Date,
-        require: true
+        required: true
     },
     end: {
         type: Date,
-        require: true
+        required: true
     },
     user: {
         type: Schema.Types.ObjectId, // Va a ser una referencia a un objeto
-        ref: 'Usuario' // Nombre del otro esquema
+        ref: 'Usuario', // Nombre del otro esquema
+        required: true
     }
 });
 
