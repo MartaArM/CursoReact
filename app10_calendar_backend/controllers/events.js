@@ -37,12 +37,9 @@ const crearEvento = async(req, res) => {
 const actualizarEvento = async(req, res) => {
 
     const id_evento = req.params.id;
-    console.log(id_evento);
 
     try {
         const eventoID = await Evento.findById(id_evento);
-
-        console.log(eventoID);
 
         if (eventoID) {
 
@@ -86,11 +83,46 @@ const actualizarEvento = async(req, res) => {
     
 }
 
-const eliminarEvento = (req, res) => {
-    return res.status(201).json({
-        ok: true,
-        msg: "Eliminar evento"
-    })
+const eliminarEvento = async(req, res) => {
+    const id_evento = req.params.id;
+
+    try {
+        const eventoID = await Evento.findById(id_evento);
+
+
+        if (eventoID) {
+
+            const user_id = req.uid;
+            if (eventoID.user.toString() == user_id) {
+                const eventoEliminar = await Evento.findOneAndRemove(eventoID);
+
+                return res.status(201).json({
+                    ok: true,
+                    evento: eventoEliminar
+                })
+            }
+            else {
+                return res.status(401).json({
+                    ok: false,
+                    msg: "No tiene permiso para eliminar el evento."
+                })
+            }
+
+        }
+        else {
+            return res.status(404).json({
+                ok: false,
+                msg: "No se pudo encontrar el evento."
+            })
+        }
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: "Hable con el administrador"
+        })
+    }
 }
 
 module.exports = {
