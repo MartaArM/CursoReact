@@ -9,7 +9,7 @@ export const AppRouter = () => {
     const {status, checkAuthToken} = useAuthStore();
 
     useEffect(() => {
-      //checkAuthToken();
+      checkAuthToken();
     }, []);
     
 
@@ -21,7 +21,7 @@ export const AppRouter = () => {
     // else {
 
     if (status == 'checking') {
-      <h3>Cargando...</h3>
+      return <h3>Cargando...</h3>
     }
 
     return (
