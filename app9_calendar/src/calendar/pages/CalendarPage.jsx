@@ -11,6 +11,7 @@ import { useUIStore } from '../../hooks/useUIStore'
 import { useCalendarStore } from '../../hooks/useCalendarStore'
 import { ButtonAddNew } from '../components/ButtonAddNew'
 import { ButtonDelete } from '../components/ButtonDelete'
+import { useEffect } from 'react'
 
 // const events = [{
 //   title: 'Cumpleaños',
@@ -28,7 +29,7 @@ export const CalendarPage = () => {
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');
 
   const {isModalOpen, openModal} = useUIStore();
-  const {events, setActiveEvent} = useCalendarStore();
+  const {events, setActiveEvent, startLoadingEvents} = useCalendarStore();
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style= {
@@ -40,6 +41,11 @@ export const CalendarPage = () => {
       style
     }
   }
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, [])
+  
 
   // Eventos
 
