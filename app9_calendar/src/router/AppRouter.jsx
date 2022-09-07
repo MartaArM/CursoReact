@@ -6,7 +6,7 @@ import { CalendarPage } from '../calendar/pages/CalendarPage'
 export const AppRouter = () => {
 
     // const status = 'non-authenticated'; //useStatus();
-    const status = 'authenticated';
+    const status =  'checking'; //'authenticated';
 
     // if (status == 'checking') {
     //   return <CheckingAuth /> // Si estamos comprobando el login, se carga una pantalla de espera con un circulo cargando

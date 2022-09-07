@@ -1,17 +1,50 @@
+import { useForm } from '../../hooks/useForm';
 import './LoginPage.css';
 
+const loginForm = {
+    loginEmail: '',
+    loginPassword: ''
+}
+
+const registerForm = {
+    registerName: '',
+    registerEmail: '',
+    registerPassword: '',
+    registerPasswordCheck: ''
+}
+
 export const LoginPage = () => {
+
+    const {formState:onLoginFormState, onInputChange:onLoginInputChange} = useForm(loginForm);
+    const {loginEmail, loginPassword} = onLoginFormState;
+
+    const loginSubmit = (event) => {
+        event.preventDefault();
+        console.log({loginEmail, loginPassword});
+    }
+
+    const {formState:onRegisterFormState, onInputChange:onRegisterInputChange} = useForm(registerForm);
+    const {registerName, registerEmail, registerPassword, registerPasswordCheck} = onRegisterFormState;
+
+    const registerSubmit = (event) => {
+        event.preventDefault();
+        console.log({registerName, registerEmail, registerPassword, registerPasswordCheck});
+    }
+
     return (
         <div className="container login-container">
             <div className="row">
                 <div className="col-md-6 login-form-1">
                     <h3>Iniciar sesión</h3>
-                    <form>
+                    <form onSubmit={loginSubmit}>
                         <div className="form-group mb-2">
                             <input 
                                 type="text"
                                 className="form-control"
                                 placeholder="Correo"
+                                name="loginEmail"
+                                onChange={onLoginInputChange}
+                                value={loginEmail}
                             />
                         </div>
                         <div className="form-group mb-2">
@@ -19,6 +52,9 @@ export const LoginPage = () => {
                                 type="password"
                                 className="form-control"
                                 placeholder="Contraseña"
+                                name="loginPassword"
+                                onChange={onLoginInputChange}
+                                value={loginPassword}
                             />
                         </div>
                         {/* <div className="form-group mb-2"> */}
@@ -34,12 +70,15 @@ export const LoginPage = () => {
 
                 <div className="col-md-6 login-form-2">
                     <h3>Registro</h3>
-                    <form>
+                    <form onSubmit={registerSubmit}>
                         <div className="form-group mb-2">
                             <input
                                 type="text"
                                 className="form-control"
                                 placeholder="Nombre"
+                                name="registerName"
+                                onChange={onRegisterInputChange}
+                                value={registerName}
                             />
                         </div>
                         <div className="form-group mb-2">
@@ -47,13 +86,19 @@ export const LoginPage = () => {
                                 type="email"
                                 className="form-control"
                                 placeholder="Correo"
+                                name="registerEmail"
+                                onChange={onRegisterInputChange}
+                                value={registerEmail}
                             />
                         </div>
                         <div className="form-group mb-2">
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Contraseña" 
+                                placeholder="Contraseña"
+                                name="registerPassword"
+                                onChange={onRegisterInputChange}
+                                value={registerPassword}
                             />
                         </div>
 
@@ -61,7 +106,10 @@ export const LoginPage = () => {
                             <input
                                 type="password"
                                 className="form-control"
-                                placeholder="Repita la contraseña" 
+                                placeholder="Repita la contraseña"
+                                name="registerPasswordCheck"
+                                onChange={onRegisterInputChange}
+                                value={registerPasswordCheck}
                             />
                         </div>
 
