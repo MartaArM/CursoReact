@@ -10,6 +10,7 @@ import { addHours, differenceInSeconds } from "date-fns";
 import Swal from "sweetalert2";
 import { useUIStore } from "../../hooks/useUIStore";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
+import { useAuthStore } from "../../hooks/useAuthStore";
 
 registerLocale('es', es)
 
@@ -43,6 +44,10 @@ export const EventView = () => {
 
   const {formState, onInputChange, onDateChanged, onChangeValues} = useForm(initialState);
   const {title, notes, start, end} = formState;
+
+  const {user} = useAuthStore();
+  
+  const isReadOnly = ((user.uid != activeEvent.user._id) && (activeEvent._id)) ? true : false; 
 
   // Si ya le hemos dado al botón de guardar y el título está vacío, el campo del título de pone en rojo
   const titleClass = useMemo(() => {
@@ -127,6 +132,7 @@ export const EventView = () => {
                 locale="es"
                 value={start}
                 timeCaption="Hora"
+                readOnly={isReadOnly}
                 /> 
 
           </div>
@@ -142,6 +148,7 @@ export const EventView = () => {
                 showTimeSelect // Para elegir la hora
                 locale="es" // Idioma español
                 timeCaption="Hora"
+                readOnly={isReadOnly}
                 /> 
           </div>
 
@@ -156,6 +163,7 @@ export const EventView = () => {
                   autoComplete="off"
                   value={title}
                   onChange={onInputChange}
+                  readOnly={isReadOnly}
               />
               <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
           </div>
@@ -169,6 +177,7 @@ export const EventView = () => {
                   name="notes"
                   value={notes}
                   onChange={onInputChange}
+                  readOnly={isReadOnly}
               ></textarea>
               <small id="emailHelp" className="form-text text-muted">Información adicional</small>
           </div>
