@@ -28,11 +28,21 @@ export const AppRouter = () => {
     <Routes>
 
         { ( status == 'authenticated')
-             ? <Route path="/*" element={<CalendarPage /* Diario / journal */ />} /> 
-             : <Route path="auth/*" element={<LoginPage /* Login y registro */ />}/> 
+             ? (
+                <>
+                    <Route path="/" element={<CalendarPage /* Diario / journal */ />} /> 
+                    <Route path='/*' element = {<Navigate to='/' />} />
+                </>
+               ) 
+             : (
+                <>
+                    <Route path="auth/*" element={<LoginPage /* Login y registro */ />}/> 
+                    <Route path='/*' element = {<Navigate to='/auth/login' />} />
+                </>
+               )
         }
 
-        <Route path='/*' element = {<Navigate to='/auth/login' />} />
+        
 
     </Routes>
     )  
