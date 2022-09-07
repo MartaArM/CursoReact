@@ -25,11 +25,30 @@ export const useAuthStore = () => {
         }
     }
 
+    const startRegister = async({name, email, password}) => {
+        dispatch(setChecking());
+
+        try {
+            const {data} = await calendarApi.post('/auth/new', { name, email, password});
+            localStorage.setItem('token', data.token); // Guardamos en el almacenamiento el token del usuario
+            dispatch(onLogin({name: data.name, uid: data.uid}));
+            
+        } catch (error) {
+            console.log(error.response.data);
+            dispatch(onLogout( (error.response.data.msg) ?  error.response.data.msg : 'Credenciales incorrectas'));
+            setTimeout(() => {
+                dispatch(clearErrorMessage())
+            }, 10);
+            // throw new Error("Contacte con administrador");
+        }
+    }
+
     return {
         status,
         user,
         errorMessage,
 
-        startLogin
+        startLogin,
+        startRegister
     }
 }
