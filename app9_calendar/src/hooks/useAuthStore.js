@@ -43,12 +43,31 @@ export const useAuthStore = () => {
         }
     }
 
+    const checkAuthToken = async() => {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            try {
+                const {data} = await calendarApi.get('auth/renew');
+                localStorage.setItem('token', data.token);
+                dispatch(onLogin({name: data.name, uid: data.uid}));
+            } catch (error) {
+                localStorage.clear(); // Quitamos el token del almacenamiento ya que no es válido
+                dispatch(onLogout('La sesión expiró'));
+            }
+        }
+        else {
+            return dispatch(onLogout('La sesión expiró'));
+        }
+    }
+
     return {
         status,
         user,
         errorMessage,
 
         startLogin,
-        startRegister
+        startRegister,
+        checkAuthToken
     }
 }
