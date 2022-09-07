@@ -17,12 +17,12 @@ export const useCalendarStore = () => {
 
         if (calendarEvent._id) { // Si existe el evento
             // Actualizar evento
-            dispatch(onUpdateEvent());
+            dispatch(onUpdateEvent(calendarEvent));
         }
         else {
             // Crear evento
             const {data} = await calendarApi.post('/events', calendarEvent);
-            dispatch(onAddEvent( { id: data.evento.id, ...calendarEvent, user })); // Como no tiene id se lo añado
+            dispatch(onAddEvent( { _id: data.evento.id, ...calendarEvent, user })); // Como no tiene id se lo añado
         }
     }
 
