@@ -12,6 +12,7 @@ import { useCalendarStore } from '../../hooks/useCalendarStore'
 import { ButtonAddNew } from '../components/ButtonAddNew'
 import { ButtonDelete } from '../components/ButtonDelete'
 import { useEffect } from 'react'
+import { useAuthStore } from '../../hooks/useAuthStore'
 
 // const events = [{
 //   title: 'Cumpleaños',
@@ -26,15 +27,21 @@ import { useEffect } from 'react'
 
 export const CalendarPage = () => {
 
+  const {user} = useAuthStore();
+
   const [lastView, setlastView] = useState(localStorage.getItem('lastView') || 'month');
 
   const {isModalOpen, openModal} = useUIStore();
   const {events, setActiveEvent, startLoadingEvents} = useCalendarStore();
 
   const eventStyleGetter = (event, start, end, isSelected) => {
+
+    const isMyEvent = ((user.uid === event.user._id) || (user.uid === event.user.uid)) ? true : false; 
+
     const style= {
-      backgroundColor: '#29e6b6',
-      color: 'black'
+      backgroundColor: isMyEvent ? '#29e6b6' : '#b3b3b3',
+      color: 'black',
+      opacity: isMyEvent ? 1 : 0.6
     }
 
     return {
