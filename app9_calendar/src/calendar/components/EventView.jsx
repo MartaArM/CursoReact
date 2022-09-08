@@ -46,8 +46,10 @@ export const EventView = () => {
   const {title, notes, start, end} = formState;
 
   const {user} = useAuthStore();
-  
-  const isReadOnly = ((user.uid != activeEvent.user._id) && (activeEvent._id)) ? true : false; 
+  let isReadOnly = false;
+
+  if (activeEvent)
+    isReadOnly = ((user.uid != activeEvent.user.uid) && (activeEvent._id) ) ? true : false; 
 
   // Si ya le hemos dado al botón de guardar y el título está vacío, el campo del título de pone en rojo
   const titleClass = useMemo(() => {
